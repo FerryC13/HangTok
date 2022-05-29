@@ -147,6 +147,7 @@ function App() {
           show(setshowNotification);
         }
       }
+
     }
 
     return (
@@ -155,7 +156,7 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path="/" exact/>
-					<Route path="/instructions" component={Instr}/>
+					<Route path="/instr" component={Instr}/>
 				</Routes>
 			</Router>
         <Header className="head" />
