@@ -8,6 +8,10 @@ import Notification from "./components/Notification";
 import { showNotification as show } from "./helpers/helpers";
 import "./App.css";
 import axios from "axios";
+import Navbar from "./components/Navbar";
+//import { Router } from "express";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Instr from './pages/Instr'
 
 // const words = ["application", "programming", "interface", "wizard"];
 
@@ -22,23 +26,24 @@ function App() {
   const [showNotification, setshowNotification] = useState(false);
   const [post, setPost] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://random-word-api.herokuapp.com/word")
-      .then((res) => {
-        if (i.current == 0) {
-          selectedWord = res.data[0];
-          console.log(selectedWord);
-          setPost(selectedWord);
-          i.current = i.current + 1;
-        }
-        // console.log(res);
-        // console.log(res.data[0]);
-        // console.log(post);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+	useEffect(() => {
+		axios
+			.get("https://random-word-api.herokuapp.com/word")
+			.then((res) => {
+				if (i.current == 0) {
+					selectedWord = res.data[0];
+					console.log(selectedWord);
+					setPost(selectedWord);
+					i.current = i.current + 1;
+				}
+				// console.log(res);
+				// console.log(res.data[0]);
+				// console.log(post);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 
     const handleKeydown = (event) => {
       {
@@ -52,8 +57,10 @@ function App() {
     };
     window.addEventListener("keydown", handleKeydown);
 
-    return () => window.removeEventListener("keydown", handleKeydown);
-  }, [correctLetters, wrongLetters, playable]);
+
+		return () => window.removeEventListener("keydown", handleKeydown);
+	}, [correctLetters, wrongLetters, playable]);
+
 
   function playAgain() {
     setPlayable(true);
@@ -145,10 +152,15 @@ function App() {
 
     }
 
-
-
     return (
       <>
+      <Router className="router">
+				<Navbar />
+				<Routes>
+					<Route path="/" exact/>
+					<Route path="/instructions" component={Instr}/>
+				</Routes>
+			</Router>
         <Header className="head" />
         <div className="game-container">
           <WrongLetters wrongLetters={wrongLetters} />
