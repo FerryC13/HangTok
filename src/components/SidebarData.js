@@ -12,7 +12,7 @@ export const SidebarData = [
     },
     {
         title: 'How To Play',
-        path: '/Instr',
+        path: 'pages/Instr',
         icon: <RiIcons.RiQuestionMark />,
         cName: 'nav-text'
     },

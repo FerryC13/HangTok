@@ -84,7 +84,7 @@ function App() {
 	}
 	return (
 		<>
-			<Router>
+			<Router className="router">
 				<Navbar />
 				<Routes>
 					<Route path="/" exact/>
