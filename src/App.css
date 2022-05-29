@@ -16,9 +16,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 80vh;
+  height: 100%;
   margin: 0;
-  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .head {
@@ -131,8 +131,8 @@ p {
   border-radius: 10px 10px 0 0;
   padding: 15px 20px;
   position: absolute;
-  bottom: -50px;
   transition: transform 0.3s ease-in-out;
+  visibility:hidden;
 }
 
 .notification-container p {
@@ -140,5 +140,6 @@ p {
 }
 
 .notification-container.show {
+  visibility: unset;
   transform: translateY(-50px);
 }
