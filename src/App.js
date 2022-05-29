@@ -16,7 +16,7 @@ import Instr from './pages/Instr'
 // const words = ["application", "programming", "interface", "wizard"];
 
 // let selectedWord = words[Math.floor(Math.random() * words.length)];
-let selectedWord = "";
+var selectedWord = "";
 
 function App() {
   const i = useRef(0);
@@ -24,7 +24,7 @@ function App() {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setshowNotification] = useState(false);
-  const [post, setPost] = useState([]);
+//   const [post, setPost] = useState([]);
 
 
 	useEffect(() => {
@@ -32,9 +32,9 @@ function App() {
 			.get("https://random-word-api.herokuapp.com/word")
 			.then((res) => {
 				if (i.current == 0) {
-					selectedWord = res.data[0];
+					selectedWord = res.data[0].toUpperCase();
 					console.log(selectedWord);
-					setPost(selectedWord);
+					// setPost(selectedWord);
 					i.current = i.current + 1;
 				}
 				// console.log(res);
@@ -131,7 +131,8 @@ function App() {
     function gameLogic(chosen_letter) {
       var btn = document.getElementById("button_" + chosen_letter);
       btn.disabled = true;
-      if (post.includes(chosen_letter)) {
+	  console.log(selectedWord);
+      if (selectedWord.includes(chosen_letter)) {
         if (!correctLetters.includes(chosen_letter)) {
           setCorrectLetters((currentLetters) => [
             ...currentLetters,
@@ -148,6 +149,8 @@ function App() {
         }
       }
 
+
+
     }
 
     return (
@@ -156,7 +159,7 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path="/" exact/>
-					<Route path="/instr" component={Instr}/>
+					<Route path="/instructions" component={Instr}/>
 				</Routes>
 			</Router>
         <Header className="head" />
