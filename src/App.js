@@ -147,9 +147,6 @@ function App() {
           show(setshowNotification);
         }
       }
-
-
-
     }
 
     return (
