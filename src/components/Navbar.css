@@ -1,9 +1,11 @@
 .navbar{
     background-color: bisque;
     height: 80px;
+    width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
+    position: relative;
 }
 
 .menu-bars{
@@ -72,5 +74,6 @@
 span{
     margin-left: 16px;
 }
+
 
 

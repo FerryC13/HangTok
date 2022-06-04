@@ -4,7 +4,9 @@ html {
 * {
   box-sizing: border-box;
 }
-
+.root{
+  display: flex;
+}
 body {
   /* background-color: transparent;
    */
@@ -13,7 +15,6 @@ body {
   background-position: center center;
   /* color: #fff; */
   font-family: Arial, Helvetica, sans-serif;
-  display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
@@ -142,4 +143,18 @@ p {
 .notification-container.show {
   visibility: unset;
   transform: translateY(-50px);
+}
+
+.router{
+  display: inline;
+  height: 100%;
+  width: 0;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+}
+.pHolder{
+  text-align: center;
+
 }
