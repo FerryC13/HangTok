@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react"; 
  
 function Instr() { 
@@ -54,3 +55,16 @@ export default Instr;
 =======
 export default Instr;
 >>>>>>> f8ff0b4f423ca71b1fa55abcbbfa73cef8ebd81a
+=======
+import React from "react";
+
+function Instr() {
+	return (
+		<>
+			<div>How to play</div>
+		</>
+	);
+}
+
+export default Instr;
+>>>>>>> parent of b157035... update final code

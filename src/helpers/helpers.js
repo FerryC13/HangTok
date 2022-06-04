@@ -6,7 +6,7 @@ export function showNotification(setter) {
 }
 
 export function checkWin(correct, wrong, word) {
-  let status = "win";
+  let status = "";
   // check for win
   word.split("").forEach((letter) => {
     if (!correct.includes(letter)) {
@@ -14,7 +14,7 @@ export function checkWin(correct, wrong, word) {
     }
   });
 
-  // if (correct.length == 6) return "win";
+  // if (correct.length == 6) status = "win";
   // check for loss
   if (wrong.length === 6) status = "lose";
 
