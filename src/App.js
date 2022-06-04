@@ -24,26 +24,25 @@ function App() {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setshowNotification] = useState(false);
-  const [post, setPost] = useState([]);
 
-
-	useEffect(() => {
-		axios
-			.get("https://random-word-api.herokuapp.com/word")
-			.then((res) => {
-				if (i.current == 0) {
-					selectedWord = res.data[0].toUpperCase();
-					console.log(selectedWord);
-					setPost(selectedWord);
-					i.current = i.current + 1;
-				}
-				// console.log(res);
-				// console.log(res.data[0]);
-				// console.log(post);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+  axios
+  .get("https://random-word-api.herokuapp.com/word")
+  .then((res) => {
+    if (i.current == 0) {
+      selectedWord = res.data[0].toUpperCase();
+      
+      i.current = i.current + 1;
+      console.log(selectedWord);
+    }
+    // console.log(res);
+    // console.log(res.data[0]);
+    // console.log(post);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  useEffect(() => {
+    
 
     const handleKeydown = (event) => {
       {
@@ -58,8 +57,8 @@ function App() {
     window.addEventListener("keydown", handleKeydown);
 
 
-		return () => window.removeEventListener("keydown", handleKeydown);
-	}, [correctLetters, wrongLetters, playable]);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [correctLetters, wrongLetters, playable]);
 
 
   function playAgain() {
@@ -79,105 +78,106 @@ function App() {
       btn.disabled = false;
     }
   }
-    window.addEventListener("load", function (windowLoadE) {
-      var p, letter, button, holder;
-      holder = document.getElementById("buttonsHolder");
-      holder.style.zoom = "90%";
-      for (var i = 65; i <= 90; i++) {
-        if (i == 65 || i == 79) {
-          p = document.createElement("p");
-          p = document.createElement("p");
-          p.padding = "20px 30px";
-          p.position = "relative";
-          p.margin = "auto";
-          p.height = "350px";
-          p.width = "100%";
-        }
-        letter = String.fromCharCode(i);
-        button = document.createElement("button");
-        button.setAttribute("class", "letterBtn");
-        button.setAttribute("id", "button_" + letter);
-        button.innerHTML = letter;
-        button.setAttribute("data-letter", letter);
-        button.onclick = function (e) { setLetter(this.getAttribute("data-letter")); };
-        button.style.height = "100%";
-        // button.style.backgroundColor = "rgba(250,199,92,0.8)";
-        button.style.backgroundColor = "rgba(250,199,92,0.8)";
-        button.style.color = "black";
-        button.style.fontSize = "15px";
-        button.style.padding = "20px 15px";
-        button.style.borderRadius = "5px";
-        button.style.margin = "0px 5px";
-        button.style.cursor = "pointer";
-        button.style.width = "40px";
-
-
-        if (wrongLetters.includes(letter) || correctLetters.includes(letter)) {
-          button.disabled = true;
-        }
-        p.appendChild(button);
-        if (i == 78 || i == 89) {
-          holder.appendChild(p);
-        }
+  window.addEventListener("load", function (windowLoadE) {
+    var p, letter, button, holder;
+    holder = document.getElementById("buttonsHolder");
+    holder.style.zoom = "90%";
+    for (var i = 65; i <= 90; i++) {
+      if (i == 65 || i == 79) {
+        p = document.createElement("p");
+        p = document.createElement("p");
+        p.padding = "20px 30px";
+        p.position = "relative";
+        p.margin = "auto";
+        p.height = "350px";
+        p.width = "100%";
       }
-    });
+      letter = String.fromCharCode(i);
+      button = document.createElement("button");
+      button.setAttribute("class", "letterBtn");
+      button.setAttribute("id", "button_" + letter);
+      button.innerHTML = letter;
+      button.setAttribute("data-letter", letter);
+      button.onclick = function (e) { setLetter(this.getAttribute("data-letter")); };
+      button.style.height = "100%";
+      // button.style.backgroundColor = "rgba(250,199,92,0.8)";
+      button.style.backgroundColor = "rgba(250,199,92,0.8)";
+      button.style.color = "black";
+      button.style.fontSize = "15px";
+      button.style.padding = "20px 15px";
+      button.style.borderRadius = "5px";
+      button.style.margin = "0px 5px";
+      button.style.cursor = "pointer";
+      button.style.width = "40px";
 
 
-
-    function setLetter(input_letter) {
-      gameLogic(input_letter);
-    }
-
-    function gameLogic(chosen_letter) {
-      var btn = document.getElementById("button_" + chosen_letter);
-      btn.disabled = true;
-      if (post.includes(chosen_letter)) {
-        if (!correctLetters.includes(chosen_letter)) {
-          setCorrectLetters((currentLetters) => [
-            ...currentLetters,
-            chosen_letter,
-          ]);
-        } else {
-          show(setshowNotification);
-        }
-      } else {
-        if (!wrongLetters.includes(chosen_letter)) {
-          setWrongLetters((wrongLetters) => [...wrongLetters, chosen_letter]);
-        } else {
-          show(setshowNotification);
-        }
+      if (wrongLetters.includes(letter) || correctLetters.includes(letter)) {
+        button.disabled = true;
       }
-
-
-
+      p.appendChild(button);
+      if (i == 78 || i == 89) {
+        holder.appendChild(p);
+      }
     }
+  });
 
-    return (
-      <>
-      <Router className="router">
-				<Navbar />
-				<Routes>
-					<Route path="/" exact/>
-					<Route path="/instructions" component={Instr}/>
-				</Routes>
-			</Router>
-        <Header className="head" />
-        <div className="game-container">
-          <WrongLetters wrongLetters={wrongLetters} />
-          <Figure wrongLetters={wrongLetters} />
-          <Word selectedWord={selectedWord} correctLetters={correctLetters} />
-        </div>
-        <div id="buttonsHolder"></div>
-        <Popup
-          correctLetters={correctLetters}
-          wrongLetters={wrongLetters}
-          selectedWord={selectedWord}
-          setPlayable={setPlayable}
-          playAgain={playAgain}
-        />
-        <Notification showNotification={showNotification} />
-      </>
-    );
+
+
+  function setLetter(input_letter) {
+    gameLogic(input_letter);
   }
 
-  export default App;
+  function gameLogic(chosen_letter) {
+    var btn = document.getElementById("button_" + chosen_letter);
+    btn.disabled = true;
+    console.log(chosen_letter,selectedWord)
+    if (selectedWord.includes(chosen_letter)) {
+      if (!correctLetters.includes(chosen_letter)) {
+        setCorrectLetters((currentLetters) => [
+          ...currentLetters,
+          chosen_letter,
+        ]);
+      } else {
+        show(setshowNotification);
+      }
+    } else {
+      if (!wrongLetters.includes(chosen_letter)) {
+        setWrongLetters((wrongLetters) => [...wrongLetters, chosen_letter]);
+      } else {
+        show(setshowNotification);
+      }
+    }
+
+
+
+  }
+
+  return (
+    <>
+      <Router className="router">
+        <Navbar />
+        <Routes>
+          <Route path="/" exact />
+          <Route path="/instructions" component={Instr} />
+        </Routes>
+      </Router>
+      <Header className="head" />
+      <div className="game-container">
+        <WrongLetters wrongLetters={wrongLetters} />
+        <Figure wrongLetters={wrongLetters} />
+        <Word selectedWord={selectedWord} correctLetters={correctLetters} />
+      </div>
+      <div id="buttonsHolder"></div>
+      <Popup
+        correctLetters={correctLetters}
+        wrongLetters={wrongLetters}
+        selectedWord={selectedWord}
+        setPlayable={setPlayable}
+        playAgain={playAgain}
+      />
+      <Notification showNotification={showNotification} />
+    </>
+  );
+}
+
+export default App;
