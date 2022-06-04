@@ -33,7 +33,7 @@ function App() {
         selectedWord = res.data[0].toUpperCase();
 
         i.current = i.current + 1;
-        console.log(selectedWord);
+        // console.log(selectedWord);
       }
       // console.log(res);
       // console.log(res.data[0]);
