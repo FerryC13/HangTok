@@ -6,21 +6,16 @@ import * as RiIcons from "react-icons/ri"
 export const SidebarData = [
     {
         title: 'Home',
-        path: '/home',
+        path: '/',
         icon: <AiIcons.AiFillHome />,
         cName: 'nav-text'
     },
     {
         title: 'How To Play',
-        path: 'pages/Instr',
+        path: '/instr',
         icon: <RiIcons.RiQuestionMark />,
         cName: 'nav-text'
-    },
-    
-
-
-
-
+    }
 ]
 
 

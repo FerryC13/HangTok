@@ -49,4 +49,8 @@ function Instr() {
      ); 
 } 
  
+<<<<<<< HEAD
 export default Instr;
+=======
+export default Instr;
+>>>>>>> f8ff0b4f423ca71b1fa55abcbbfa73cef8ebd81a
