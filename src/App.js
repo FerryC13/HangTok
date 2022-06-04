@@ -32,7 +32,7 @@ function App() {
 			.get("https://random-word-api.herokuapp.com/word")
 			.then((res) => {
 				if (i.current == 0) {
-					selectedWord = res.data[0];
+					selectedWord = res.data[0].toUpperCase();
 					console.log(selectedWord);
 					setPost(selectedWord);
 					i.current = i.current + 1;
