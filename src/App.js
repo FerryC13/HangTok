@@ -11,7 +11,8 @@ import axios from "axios";
 import Navbar from "./components/Navbar";
 //import { Router } from "express";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Instr from './pages/Instr'
+import Instr from './pages/Instr';
+import "./components/Navbar.css"
 
 // const words = ["application", "programming", "interface", "wizard"];
 
@@ -26,24 +27,23 @@ function App() {
   const [showNotification, setshowNotification] = useState(false);
 
   axios
-  .get("https://random-word-api.herokuapp.com/word")
-  .then((res) => {
-    if (i.current == 0) {
-      selectedWord = res.data[0].toUpperCase();
-      
-      i.current = i.current + 1;
-      console.log(selectedWord);
-    }
-    // console.log(res);
-    // console.log(res.data[0]);
-    // console.log(post);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-  useEffect(() => {
-    
+    .get("https://random-word-api.herokuapp.com/word")
+    .then((res) => {
+      if (i.current == 0) {
+        selectedWord = res.data[0].toUpperCase();
 
+        i.current = i.current + 1;
+        console.log(selectedWord);
+      }
+      // console.log(res);
+      // console.log(res.data[0]);
+      // console.log(post);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  useEffect(() => {
     const handleKeydown = (event) => {
       {
         const { key, keyCode } = event;
@@ -85,7 +85,8 @@ function App() {
     for (var i = 65; i <= 90; i++) {
       if (i == 65 || i == 79) {
         p = document.createElement("p");
-        p = document.createElement("p");
+        p.setAttribute("class", "pHolder");
+
         p.padding = "20px 30px";
         p.position = "relative";
         p.margin = "auto";
@@ -130,7 +131,7 @@ function App() {
   function gameLogic(chosen_letter) {
     var btn = document.getElementById("button_" + chosen_letter);
     btn.disabled = true;
-    console.log(chosen_letter,selectedWord)
+    console.log(chosen_letter, selectedWord)
     if (selectedWord.includes(chosen_letter)) {
       if (!correctLetters.includes(chosen_letter)) {
         setCorrectLetters((currentLetters) => [
@@ -154,13 +155,14 @@ function App() {
 
   return (
     <>
-      <Router className="router">
+    <div className="router">
+      <Router>
         <Navbar />
         <Routes>
           <Route path="/" exact />
           <Route path="/instructions" component={Instr} />
         </Routes>
-      </Router>
+      </Router></div>
       <Header className="head" />
       <div className="game-container">
         <WrongLetters wrongLetters={wrongLetters} />
